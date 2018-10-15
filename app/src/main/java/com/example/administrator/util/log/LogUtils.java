@@ -1,16 +1,18 @@
 package com.example.administrator.util.log;
 
+import android.support.annotation.StringDef;
 import android.util.Log;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 public class LogUtils {
-    public static final String i = "i";
-    public static final String d = "d";
-    public static final String e = "e";
-    public static final String v = "v";
-    public static final String w = "w";
-    public static final String wtf = "wtf";
+    public static final String i = "i", d = "d", e = "e", v = "v", w = "w", wtf = "wtf";
 
-    public static void showLongLog(String type, String tag, String log, int showCount){
+    @StringDef({i, d, e, v, w, wtf})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface LogType{}
+
+    public static void showLongLog(@LogType  String type, String tag, String log, int showCount){
         if(log.length() >showCount){
             String s = log.substring(0, showCount);
             show(type, tag, s);
